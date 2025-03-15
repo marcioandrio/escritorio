@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Advogado de imigração.">
+    <meta name="description" content="Site pessoal de Marcio Andrio, Advogado de Imigração.">
+    <meta name="google-site-verification" content="ziNiWE8pxnKRG_Glj3odX2KLYT710iRwfM_BF8g9IwA" />
+
+    <title>Marcio Andrio Advocacia</title>
+    <link rel="stylesheet" type="text/css" href="style.css">  <!--link para conectar no CSS-->
+</head>
+
+<body>
+<!-- cabeçalho -->
+<header class="cabecalho">
+    <img class="cabecalho-imagem" src="logo/nome.png" alt="Logo do escirtorio"> <!--logo-->
+        <nav class="cabecalho-menu">
+<!--            <a class="cabecalho-menu-item" href="#home">Tutorial</a> -->
+            <a class="cabecalho-menu-item" href="#home">Inicio</a>
+            <a class="cabecalho-menu-item" href="#sobre">Sobre</a>
+            <a class="cabecalho-menu-item" href="#servico">Serviços</a>
+            <a class="cabecalho-menu-item" href="#equipe">Equipe</a>
+            <a class="cabecalho-menu-item" href="doc/flyer.pdf" target="_blank">Flyer/informações</a>
+        </nav>
+    </header>    
+
+<!-----------------------------------------------------Scroll----------------------------------------------------->        
+<script>  <!-- texto para o cabeçalho transparente-->
+    document.addEventListener("scroll", function() {
+        var cabecalho = document.querySelector(".cabecalho");
+        if (window.scrollY > 50) { // Quando rolar mais de 50px
+            cabecalho.classList.add("solid");
+        } else {
+            cabecalho.classList.remove("solid");
+        }
+    });
+</script>
+<!-----------------------------------------------------home----------------------------------------------------->
+    <main>
+        <section class="home" id="home">
+            <div class="home-escrito">
+              <h1 class="home-escrito-titulo">Advogado de</h1>
+              <h1 class="home-escrito-titulo">Imigração</h1>              
+              <h2 class="home-escrito-subtitulo">Emissão de documentos para imigração a Portugal <br>Auxiliando você em cada etapa do processo com segurança e eficiência.</h2>
+              <a href="https://wa.me/351960389573?text=Olá, gostaria de obter mais informações." target="_blank" class="whatsapp-button">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
+                Fale conosco
+              </a>
+              
+            </div>
+            <img class="home-imagem"src="logo/logo.png" alt="logo do escirtorio">
+        </section>
+<!-----------------------------------------------------Sobre----------------------------------------------------->
+        <section class="sobre" id="sobre"> 
+
+            <div class="texto-sobre">
+                <h1 class="texto-sobre-titulo">Sobre</h1>
+                <div class="caixa-texto">
+                    <h2 class="texto-sobre-subtitulo">Temos o compromisso de oferecer serviços jurídicos de alta qualidade, sempre com ética, transparência e dedicação. Com anos de experiência, atuamos em diversas áreas do direito, garantindo soluções estratégicas e personalizadas para cada cliente.</h2>
+                    <h2 class="texto-sobre-subtitulo">Nosso objetivo é proporcionar segurança jurídica, orientação clara e uma atuação eficaz em todas as etapas do processo. Seja na esfera consultiva ou contenciosa, estamos preparados para defender seus interesses com excelência e profissionalismo.</h2>
+                    <h2 class="texto-sobre-subtitulo">Entre em contato e descubra como podemos ajudar você ou sua empresa a alcançar a melhor solução jurídica.</h2>
+                </div>
+            </div>
+
+            <div class="imgagem-sobre"> 
+                <img src="img/desktop.jpg" alt="Imagem do sobre">
+            </div>
+
+        </section>
+<!-----------------------------------------------------Serviços----------------------------------------------------->        
+        <section id="servico">
+            <div class="servico">
+                <div>
+                <h1 class="titulo">SERVIÇOS</h1>
+                </div>
+                
+                <div class="servico-menu">
+                    <div class="servico">
+
+                        <div class="imagem-servico">
+                            <a href="http://exemplo.com">
+                                <img src="servico/servico1.png" alt="Serviço 1">
+                            </a>
+                        </div>
+
+                        <p class="caixa-titulo-servico">
+                            <span class="titulo-servico">Assessoria em Processos de Imigração e Vistos</span>
+                        </p>
+
+                        <div class="caixa-texto-servico">    
+                            <span class="texto-servico">Auxiliamos na obtenção de vistos, residência e reagrupamento familiar, garantindo um processo seguro e ágil.</span>
+                        </div>
+                        
+                    </div>        
+
+                    <div class="servico">
+
+                        <div class="imagem-servico">
+                            <img src="servico/servico2.png" alt="Serviço 2">
+                        </div>
+
+                        <p class="caixa-titulo-servico">
+                            <span class="titulo-servico">Emissão de Documentos (NIF, NISS, Utente e Outros)</span>
+                        </p>
+                        <div class="caixa-texto-servico">
+                            <span class="texto-servico">Auxiliamos na emissão de NIF, NISS, número de utente e outros documentos essenciais com rapidez e segurança.</span>
+                        </div>
+                    </div>
+
+                    <div class="servico">
+
+                        <div class="imagem-servico">
+                            <img src="servico/servico3.png" alt="Serviço 1">
+                        </div>
+
+                        <p class="caixa-titulo-servico">
+                            <span class="titulo-servico">Direito de Família e Direito Criminal no Brasil</span>
+                        </p>
+                        <div class="caixa-texto-servico">
+                            <span class="texto-servico">Oferecemos suporte em direito de família e criminal, garantindo soluções jurídicas eficientes e humanizadas.</span>
+                        </div>
+                    </div>    
+                </div>
+            </div>             
+        </section>
+<!-----------------------------------------------------Equipe----------------------------------------------------->        
+        <section id="equipe">
+            <div class="equipe">
+                <div>
+                    <h1 class="titulo">EQUIPE</h1>
+                </div>
+
+                <div class="equipe-top">
+                    <div class="equipe">
+                        <div class="imagem-equipe"> 
+                            <a href="https://www.instagram.com/helenparwani/" target="_blank" >
+                            <img src="colaboradores/colaborador1.jpg" alt="Colaborador 1">
+                            </a>
+                        </div>
+                        <p>
+                            <span class="nome-colaborador">Helen Parwani</span>
+                            <span class="funcao-colaborador">ASSOCIADA</span>                    
+                        </p>
+                        <p class="caixa-texto-equipe">
+                            <span class="texto-equipe">Atuando como associada, oferece suporte jurídico com ética e profissionalismo. Sua contribuição tem sido valiosa, trazendo novas perspectivas e atendendo de forma atenta às necessidades dos clientes.</span>      
+                        </p>
+                    </div>        
+
+                <div class="equipe">
+                    <div class="imagem-equipe"> 
+                        <a href="https://www.instagram.com/adv.marcio_andrio/" target="_blank" >
+                            <img src="colaboradores/colaborador2.jpg" alt="Colaborador 2">
+                        </a>
+                    </div>
+                    <p>
+                        <span class="nome-colaborador">Marcio Andrio</span>
+                        <span class="funcao-colaborador">ADVOGADO</span>                    
+                    </p>
+                    <p class="caixa-texto-equipe">
+                        <span class="texto-equipe">Com ampla experiência em Direito de Imigração, oferece soluções jurídicas personalizadas no Brasil e na Europa. Destaca-se pela expertise em processos de imigração, incluindo vistos e cidadania.</span>      
+                    </p>
+                </div>                
+
+                <div class="equipe">
+                    <div class="imagem-equipe"> 
+                        <a href="https://www.instagram.com/fabiaquino_/" target="_blank" >
+                            <img src="colaboradores/colaborador3.jpg" alt="Colaborador 3">
+                        </a>
+                    </div>
+                    <p>
+                        <span class="nome-colaborador">Fabíola Aquino</span>
+                        <span class="funcao-colaborador">SOLICITADORA</span>                    
+                    </p>
+                    <p class="caixa-texto-equipe">
+                        <span class="texto-equipe">Com ampla experiência na área jurídica, atua como associada no escritório, destacando-se pelo compromisso com a ética e a busca por soluções estratégicas que atendam às necessidades de seus clientes. Sua abordagem é pautada na excelência e na segurança jurídica, sempre oferecendo um atendimento personalizado e eficaz.</span>      
+                    </p>
+                </div>                
+            </div>
+        </section>
+
+    </main>
+
+<!-----------------------------------------------------Rodapé----------------------------------------------------->        
+    <footer class="rodape">
+        <div class="titulo-rodape-texto">
+            <h2></h2>
+            <h2>CONTATOS</h2>
+        </div>
+        
+<!-- Número de telefone com ícone, empurrado 200px para a direita -->
+        <div class="telemovel">
+            <img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="Telefone" class="icones">
+            <b>+351 960 389 573</b>
+        </div>
+        
+<!-- Endereço de e-mail com ícone, empurrado 200px para a direita -->
+        <div class="telemovel">
+            <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Email" class="icones">            
+            <b>marcio.andrio@icloud.com</b>
+        </div>
+    </footer>
+
+</body>
+
+</html>
