@@ -89,6 +89,11 @@
     flex-direction: column; /**/
     gap: 10px;
   }
+  .caixa-texto-equipe {
+    padding: 0px; /* Espaçamento interno da caixa */
+    margin: 0px; /* Espaçamento externo da caixa */
+    max-width: 700px; /* Limita a largura máxima (ajuste conforme necessário) */
+  }
 /*------------------- Rodapé -------------------*/
   .rodape{
     display: flex;
@@ -106,8 +111,6 @@
     text-shadow: 4px 4px 2px rgba(1, 1, 1, 1); /* Sombra preta suave 0.7 era o padrão*/
     margin: 0 auto; /* Centraliza o elemento pai horizontalmente */
   }
-
-
 }
 
 /*------------------------------------------------------------------------- DeskTop -------------------------------------------------------------------------*/
@@ -194,6 +197,11 @@
     display: flex;
     align-items: flex-start;
   }
+  .caixa-texto-equipe {
+    padding: 0px; /* Espaçamento interno da caixa */
+    margin: 0px; /* Espaçamento externo da caixa */
+    max-width: 400px; /* Limita a largura máxima (ajuste conforme necessário) */
+  }
 /*------------------- Rodapé -------------------*/
   .rodape{
     background-color: rgba(50, 43, 43, 0.9); /* fundo branco */
@@ -211,9 +219,7 @@
     /*text-shadow: 2px 2px 1px rgba(0, 0, 0, 0.9); /* Sombra preta suave 0.7 era o padrão*/
     text-shadow: 4px 4px 2px rgba(1, 1, 1, 1); /* Sombra preta suave 0.7 era o padrão*/
   }
-
 }
-
 
 /*-------------------------------------------------------------------------Scroll-------------------------------------------------------------------------*/
 #home {
@@ -401,11 +407,6 @@
   color: black; /* Cor preta para o nome */
   display: block;
 }
-.caixa-texto-equipe {
-  padding: 0px; /* Espaçamento interno da caixa */
-  margin: 0px; /* Espaçamento externo da caixa */
-  max-width: 400px; /* Limita a largura máxima (ajuste conforme necessário) */
-}
 .texto-equipe {
   font-size: 18px;
   color: black; /* Cor preta para o texto */
@@ -425,5 +426,4 @@
     color: rgb(250, 250, 250);
     text-shadow: 4px 4px 2px rgba(0, 0, 0, 1); /* Sombra preta suave 0.7 era o padrão*/
     /*margin-top: 50px; /**/
-
-  }
+}
