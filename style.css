@@ -9,22 +9,11 @@
   body {
       font-size: 16px;
       background: url('img/fundocelular.jpeg') no-repeat center fixed;
-
       background-size: cover;
-      opacity: 1;
-      
+      opacity: 1;    
       background-attachment: fixed; /* Faz o fundo fixar enquanto o conteúdo rola */
       background-size: 100% 100%; /* Faz o fundo cobrir toda a tela, independentemente da orientação */
       height: 100vh; /* Garante que o fundo cubra toda a altura da tela */
-
-      
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; /**/
-
-      
-      
   }
 /*------------------- cabeçalho -------------------*/
   .cabecalho-imagem {
