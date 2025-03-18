@@ -19,6 +19,7 @@
   }
   .site{
     display: flex;
+    flex-direction: column;
     justify-content: center;
   }
 /*------------------- cabeçalho -------------------*/
