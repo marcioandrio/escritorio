@@ -1,206 +1,240 @@
-<!DOCTYPE html>
+<script type="text/javascript">
+    var gk_isXlsx = false;
+    var gk_xlsxFileLookup = {};
+    var gk_fileData = {};
+    function filledCell(cell) {
+      return cell !== '' && cell != null;
+    }
+    function loadFileData(filename) {
+    if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+        try {
+            var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+            var firstSheetName = workbook.SheetNames[0];
+            var worksheet = workbook.Sheets[firstSheetName];
+
+            // Convert sheet to JSON to filter blank rows
+            var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+            // Filter out blank rows (rows where all cells are empty, null, or undefined)
+            var filteredData = jsonData.filter(row => row.some(filledCell));
+
+            // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+            var headerRowIndex = filteredData.findIndex((row, index) =>
+              row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+            );
+            // Fallback
+            if (headerRowIndex === -1 || headerRowIndex > 25) {
+              headerRowIndex = 0;
+            }
+
+            // Convert filtered JSON back to CSV
+            var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+            csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+            return csv;
+        } catch (e) {
+            console.error(e);
+            return "";
+        }
+    }
+    return gk_fileData[filename] || "";
+    }
+    </script><!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Advogado de imigração.">
-    <meta name="description" content="Site pessoal de Marcio Andrio, Advogado de Imigração.">
-    <meta name="description" content="ajuda a tirar documentos em Portugal.">
-    <meta name="google-site-verification" content="ziNiWE8pxnKRG_Glj3odX2KLYT710iRwfM_BF8g9IwA" />
-
-    <title>Marcio Andrio Advocacia</title>
-    <link rel="stylesheet" type="text/css" href="style.css">  <!--link para conectar no CSS-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Marcio Andrio Advocacia - Especializado em imigração para Portugal, auxiliando na emissão de vistos, cidadania e documentos.">
+<meta name="keywords" content="imigração Portugal, advogado cidadania portuguesa, visto D7, emissão NIF, direito de família">
+<meta name="google-site-verification" content="ziNiWE8pxnKRG_Glj3odX2KLYT710iRwfM_BF8g9IwA" />
+<title>Marcio Andrio Advocacia - Imigração para Portugal</title>
+<link rel="stylesheet" type="text/css" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=Sarala:wght@400;700&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=SEU-ID"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'SEU-ID');
+</script>
 </head>
-
 <body>
-<!-- cabeçalho -->
-    <header class="cabecalho">
-    <img class="cabecalho-imagem" src="logo/nome.png" alt="Logo do escirtorio"> <!--logo-->
-        <nav class="cabecalho-menu">
-<!--            <a class="cabecalho-menu-item" href="#home">Tutorial</a> -->
-            <a class="cabecalho-menu-item" href="#home">Inicio</a>
-            <a class="cabecalho-menu-item" href="#sobre">Sobre</a>
-            <a class="cabecalho-menu-item" href="#servico">Serviços</a>
-            <a class="cabecalho-menu-item" href="#equipe">Equipe</a>
-            <a class="cabecalho-menu-item" href="doc/flyer.pdf" target="_blank">Flyer/informações</a>
-        </nav>
-    </header>    
+<header class="cabecalho">
+    <img class="cabecalho-imagem" src="logo/nome.png" alt="Logo do escritório">
+    <nav class="cabecalho-menu">
+        <a class="cabecalho-menu-item" href="#home">Início</a>
+        <a class="cabecalho-menu-item" href="#sobre">Sobre</a>
+        <a class="cabecalho-menu-item" href="#servico">Serviços</a>
+        <a class="cabecalho-menu-item" href="#equipe">Equipe</a>
+        <a class="cabecalho-menu-item" href="#depoimentos">Depoimentos</a>
+        <a class="cabecalho-menu-item" href="#contato">Contato</a>
+        <a class="cabecalho-menu-item" href="doc/flyer.pdf" target="_blank">Flyer</a>
+    </nav>
+</header>
 
-<!-----------------------------------------------------Scroll----------------------------------------------------->        
-<script>  <!-- texto para o cabeçalho transparente-->
+<script>
     document.addEventListener("scroll", function() {
         var cabecalho = document.querySelector(".cabecalho");
-        if (window.scrollY > 50) { // Quando rolar mais de 50px
+        if (window.scrollY > 50) {
             cabecalho.classList.add("solid");
         } else {
             cabecalho.classList.remove("solid");
         }
     });
 </script>
-<!-----------------------------------------------------home----------------------------------------------------->
-    <main>
-        <section class="home" id="home">
-            <div class="home-escrito">
-              <h1 class="home-escrito-titulo">Advogado de</h1>
-              <h1 class="home-escrito-titulo">Imigração</h1>              
-              <h2 class="home-escrito-subtitulo">Emissão de documentos para imigração a Portugal <br>Auxiliando você em cada etapa do processo com segurança e eficiência.</h2>
-              <a href="https://wa.me/351960389573?text=Olá, gostaria de obter mais informações." target="_blank" class="whatsapp-button">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp">
-                Fale conosco
-              </a>
-              
+
+<main>
+    <section class="home" id="home">
+        <div class="home-escrito">
+            <h1 class="home-escrito-titulo">Advogado de Imigração</h1>
+            <h2 class="home-escrito-subtitulo">Auxiliamos na emissão de documentos e vistos para sua imigração a Portugal com segurança e eficiência.</h2>
+            <a href="https://wa.me/351960389573?text=Olá, gostaria de obter mais informações." target="_blank" class="whatsapp-button">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp" loading="lazy">
+                Fale Conosco
+            </a>
+        </div>
+        <img class="home-imagem" src="logo/logo.png" alt="Logo do escritório" loading="lazy">
+    </section>
+
+    <section class="sobre" id="sobre">
+        <div class="texto-sobre">
+            <h1 class="texto-sobre-titulo">Sobre</h1>
+            <div class="caixa-texto">
+                <h2 class="texto-sobre-subtitulo">Marcio Andrio Advocacia é especializado em imigração para Portugal, oferecendo suporte completo na obtenção de vistos, cidadania portuguesa e emissão de documentos como NIF e NISS.</h2>
+                <h2 class="texto-sobre-subtitulo">Com uma equipe experiente e multilingue, garantimos um atendimento personalizado, ético e eficiente, ajudando brasileiros a realizar o sonho de viver na Europa.</h2>
+                <h2 class="texto-sobre-subtitulo">Entre em contato e descubra como podemos facilitar sua jornada de imigração.</h2>
             </div>
-            <img class="home-imagem"src="logo/logo.png" alt="logo do escirtorio">
-        </section>
-<!-----------------------------------------------------Sobre----------------------------------------------------->
-        <section class="sobre" id="sobre"> 
+        </div>
+        <div class="imgagem-sobre">
+            <img src="img/desktop.jpg" alt="Imagem do sobre" loading="lazy">
+        </div>
+    </section>
 
-            <div class="texto-sobre">
-                <h1 class="texto-sobre-titulo">Sobre</h1>
-                <div class="caixa-texto">
-                    <h2 class="texto-sobre-subtitulo">Temos o compromisso de oferecer serviços jurídicos de alta qualidade, sempre com ética, transparência e dedicação. Com anos de experiência, atuamos em diversas áreas do direito, garantindo soluções estratégicas e personalizadas para cada cliente.</h2>
-                    <h2 class="texto-sobre-subtitulo">Nosso objetivo é proporcionar segurança jurídica, orientação clara e uma atuação eficaz em todas as etapas do processo. Seja na esfera consultiva ou contenciosa, estamos preparados para defender seus interesses com excelência e profissionalismo.</h2>
-                    <h2 class="texto-sobre-subtitulo">Entre em contato e descubra como podemos ajudar você ou sua empresa a alcançar a melhor solução jurídica.</h2>
-                </div>
-            </div>
-
-            <div class="imgagem-sobre"> 
-                <img src="img/desktop.jpg" alt="Imagem do sobre">
-            </div>
-
-        </section>
-<!-----------------------------------------------------Serviços----------------------------------------------------->        
-        <section id="servico">
-            <div class="servico">
-                <div>
-                <h1 class="titulo">SERVIÇOS</h1>
-                </div>
-                
-                <div class="servico-menu">
-                    <div class="servico">
-                        <div class="imagem-servico">
-                            <a href="http://exemplo.com">
-                                <img src="servico/servico1.png" alt="Serviço 1">
-                            </a>
-                        </div>
-
-                        <p class="caixa-titulo-servico">
-                            <span class="titulo-servico">Assessoria em Processos de Imigração e Vistos</span>
-                        </p>
-
-                        <div class="caixa-texto-servico">    
-                            <span class="texto-servico">Auxiliamos na obtenção de vistos, residência e reagrupamento familiar, garantindo um processo seguro e ágil.</span>
-                        </div>                      
-                    </div>        
-
-                    <div class="servico">
-
-                        <div class="imagem-servico">
-                            <img src="servico/servico2.png" alt="Serviço 2">
-                        </div>
-
-                        <p class="caixa-titulo-servico">
-                            <span class="titulo-servico">Emissão de Documentos (NIF, NISS, Utente e Outros)</span>
-                        </p>
-                        <div class="caixa-texto-servico">
-                            <span class="texto-servico">Auxiliamos na emissão de NIF, NISS, número de utente e outros documentos essenciais com rapidez e segurança.</span>
-                        </div>
+    <section id="servico">
+        <div class="servico">
+            <h1 class="titulo">Serviços</h1>
+            <div class="servico-menu">
+                <div class="servico">
+                    <div class="imagem-servico">
+                        <img src="servico/servico1.png" alt="Assessoria em Imigração" loading="lazy">
                     </div>
-
-                    <div class="servico">
-
-                        <div class="imagem-servico">
-                            <img src="servico/servico3.png" alt="Serviço 1">
-                        </div>
-
-                        <p class="caixa-titulo-servico">
-                            <span class="titulo-servico">Direito de Família e Direito Criminal</span>
-                        </p>
-                        <div class="caixa-texto-servico">
-                            <span class="texto-servico">Oferecemos suporte em direito de família e criminal, garantindo soluções jurídicas eficientes e humanizadas.</span>
-                        </div>
-                    </div>    
+                    <p class="caixa-titulo-servico">
+                        <span class="titulo-servico">Assessoria em Processos de Imigração e Vistos</span>
+                    </p>
+                    <div class="caixa-texto-servico">
+                        <span class="texto-servico">Auxiliamos na obtenção de vistos (D7, Golden Visa), residência e reagrupamento familiar, garantindo um processo seguro e ágil.</span>
+                    </div>
                 </div>
-
-            </div>             
+                <div class="servico">
+                    <div class="imagem-servico">
+                        <img src="servico/servico2.png" alt="Emissão de Documentos" loading="lazy">
+                    </div>
+                    <p class="caixa-titulo-servico">
+                        <span class="titulo-servico">Emissão de Documentos (NIF, NISS, Utente)</span>
+                    </p>
+                    <div class="caixa-texto-servico">
+                        <span class="texto-servico">Gerenciamos a emissão de NIF, NISS, número de utente e outros documentos essenciais com rapidez e segurança.</span>
+                    </div>
+                </div>
+                <div class="servico">
+                    <div class="imagem-servico">
+                        <img src="servico/servico3.png" alt="Direito de Família e Criminal" loading="lazy">
+                    </div>
+                    <p class="caixa-titulo-servico">
+                        <span class="titulo-servico">Direito de Família e Criminal</span>
+                    </p>
+                    <div class="caixa-texto-servico">
+                        <span class="texto-servico">Oferecemos suporte em questões de direito de família e criminal, com soluções jurídicas eficientes e humanizadas.</span>
+                    </div>
+                </div>
+            </div>
         </section>
-<!-----------------------------------------------------Equipe----------------------------------------------------->        
-        <section id="equipe">
-            <div class="equipe">
-                <div>
-                    <h1 class="titulo">EQUIPE</h1>
+
+    <section id="equipe">
+        <div class="equipe">
+            <h1 class="titulo">Equipe</h1>
+            <div class="equipe-top">
+                <div class="equipe">
+                    <div class="imagem-equipe">
+                        <a href="https://www.instagram.com/helenparwani/" target="_blank">
+                            <img src="colaboradores/colaborador1.jpg" alt="Helen Parwani" loading="lazy">
+                        </a>
+                    </div>
+                    <p>
+                        <span class="nome-colaborador">Helen Parwani</span>
+                        <span class="funcao-colaborador">Associada</span>
+                    </p>
+                    <p class="caixa-texto-equipe">
+                        <span class="texto-equipe">Atuando como associada, oferece suporte jurídico com ética e profissionalismo, fluente em português, inglês e hindi.</span>
+                    </p>
                 </div>
-
-                <div class="equipe-top">
-                    <div class="equipe">
-                        <div class="imagem-equipe"> 
-                            <a href="https://www.instagram.com/helenparwani/" target="_blank" >
-                            <img src="colaboradores/colaborador1.jpg" alt="Colaborador 1">
-                            </a>
-                        </div>
-                        <p>
-                            <span class="nome-colaborador">Helen Parwani</span>
-                            <span class="funcao-colaborador">ASSOCIADA</span>                    
-                        </p>
-                        <p class="caixa-texto-equipe">
-                            <span class="texto-equipe">Atuando como associada, oferece suporte jurídico com ética e profissionalismo, fluente em português, inglês e Hindi. Sua contribuição tem sido valiosa, trazendo novas perspectivas e atendendo de forma atenta às necessidades dos clientes.</span>      
-                        </p>
-                    </div>        
-
-                    <div class="equipe">
-                        <div class="imagem-equipe"> 
-                            <a href="https://www.instagram.com/adv.marcio_andrio/" target="_blank" >
-                            <img src="colaboradores/colaborador2.jpg" alt="Colaborador 2">
-                            </a>
-                        </div>
-                        <p> 
-                            <span class="nome-colaborador">Marcio Andrio</span>
-                            <span class="funcao-colaborador">ADVOGADO</span>                    
-                        </p>
-                        <p class="caixa-texto-equipe">
-                            <span class="texto-equipe">Com ampla experiência em Direito de Imigração, oferece soluções jurídicas personalizadas no Brasil e na Europa. Destaca-se pela expertise em processos de imigração, incluindo vistos e cidadania.</span>      
-                        </p>
-                    </div>                
-
-                    <div class="equipe">
-                        <div class="imagem-equipe"> 
-                            <a href="https://www.instagram.com/fabiaquino_/" target="_blank" >
-                            <img src="colaboradores/colaborador3.jpg" alt="Colaborador 3">
-                            </a>
-                        </div>
-                        <p>
-                            <span class="nome-colaborador">Fabíola Aquino</span>
-                            <span class="funcao-colaborador">SOLICITADORA</span>                    
-                        </p>
-                        <p class="caixa-texto-equipe">
-                            <span class="texto-equipe">Atuando como solicitadora, destacando-se pelo compromisso com a ética e a busca por soluções estratégicas que atendam às necessidades de seus clientes. Sempre oferecendo um atendimento personalizado e eficaz.</span>      
-                        </p>
-                    </div>                
+                <div class="equipe">
+                    <div class="imagem-equipe">
+                        <a href="https://www.instagram.com/adv.marcio_andrio/" target="_blank">
+                            <img src="colaboradores/colaborador2.jpg" alt="Marcio Andrio" loading="lazy">
+                        </a>
+                    </div>
+                    <p>
+                        <span class="nome-colaborador">Marcio Andrio</span>
+                        <span class="funcao-colaborador">Advogado</span>
+                    </p>
+                    <p class="caixa-texto-equipe">
+                        <span class="texto-equipe">Com ampla experiência em Direito de Imigração, oferece soluções personalizadas no Brasil e na Europa.</span>
+                    </p>
                 </div>
-            </div>    
-        </section>
-    </main>
-
-<!-----------------------------------------------------Rodapé----------------------------------------------------->        
-    <footer class="rodape">
-        <div class="titulo-rodape-texto">
-            <h2></h2>
-            <h2>CONTATOS</h2>
-            <h2></h2>
-        </div>       
-<!-- Número de telefone com ícone, empurrado 200px para a direita -->
-        <div class="telemovel">
-            <img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="Telefone" class="icones">
-            <b>+351 960 389 573</b>
+                <div class="equipe">
+                    <div class="imagem-equipe">
+                        <a href="https://www.instagram.com/fabiaquino_/" target="_blank">
+                            <img src="colaboradores/colaborador3.jpg" alt="Fabíola Aquino" loading="lazy">
+                        </a>
+                    </div>
+                    <p>
+                        <span class="nome-colaborador">Fabíola Aquino</span>
+                        <span class="funcao-colaborador">Solicitadora</span>
+                    </p>
+                    <p class="caixa-texto-equipe">
+                        <span class="texto-equipe">Destaca-se pelo compromisso com a ética e soluções estratégicas, oferecendo atendimento personalizado.</span>
+                    </p>
+                </div>
+            </div>
         </div>
-<!-- Endereço de e-mail com ícone, empurrado 200px para a direita -->
-        <div class="telemovel">
-            <img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Email" class="icones">            
-            <b>marcio.andrio@icloud.com</b>
-        </div>
-    </footer>
+    </section>
 
+    <section id="depoimentos">
+        <div class="depoimentos">
+            <h1 class="titulo">Depoimentos</h1>
+            <div class="depoimentos-grid">
+                <div class="depoimento-item">
+                    <p>“O processo de obtenção do Visto D7 foi rápido e seguro. Equipe muito profissional!”</p>
+                    <p><strong>João P.</strong></p>
+                </div>
+                <div class="depoimento-item">
+                    <p>“Consegui minha cidadania portuguesa com total apoio do escritório. Recomendo!”</p>
+                    <p><strong>Maria S.</strong></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contato">
+        <div class="contato">
+            <h1 class="titulo">Contato</h1>
+            <form action="https://formspree.io/f/seu-id" method="POST">
+                <input type="text" name="nome" placeholder="Nome" required>
+                <input type="email" name="email" placeholder="E-mail" required>
+                <textarea name="mensagem" placeholder="Como podemos ajudar?" required></textarea>
+                <button type="submit">Enviar</button>
+            </form>
+            <div class="contato-info">
+                <p><img src="https://img.icons8.com/ios-filled/50/000000/phone.png" alt="Telefone" class="icones"> +351 960 389 573</p>
+                <p><img src="https://img.icons8.com/ios-filled/50/000000/email.png" alt="Email" class="icones"> <a href="mailto:advocacia@marcioandrio.com">advocacia@marcioandrio.com</a></p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer class="rodape">
+    <div class="titulo-rodape-texto">
+        <h2>© 2025 Marcio Andrio Advocacia. Todos os direitos reservados.</h2>
+    </div>
+</footer>
 </body>
-
 </html>
